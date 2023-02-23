@@ -9,4 +9,16 @@ class RestaurantsController < ApplicationController
         restaurant = Restaurant.find(params[:id])
         render json: restaurant
     end
+
+    def update
+        resturant = Restaurant.find(params[:id])
+        restaurant.update(restaurant_params)
+        render json: restaurant
+    end
+
+    private
+
+    def restaurant_params
+        paras_permit(:name, :address, :image, :style)
+    end
 end
