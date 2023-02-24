@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  resources :reviews
-  resources :restaurants
-  resources :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :reviews only: [:index, :show, :create, :update, :destroy]
+  resources :restaurants only: [:index, :show ]
+  resources :users only: [:index, :show, :create, :update, :destroy]
+  
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  post "/login" to: "sessions#create"
 end

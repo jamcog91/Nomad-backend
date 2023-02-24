@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+skip_before_action :autherize
 
     def index
         users = User.all
