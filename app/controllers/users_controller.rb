@@ -6,6 +6,10 @@ skip_before_action :authorize, only: :create
         render json: users
     end
 
+    def personal
+        feed = Post.all.order(created_at: :desc).where(user: @current_user)
+    end
+
     def show 
         users = User.find(params[:id])
         render json: users
