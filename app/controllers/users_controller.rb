@@ -11,8 +11,8 @@ skip_before_action :authorize, only: :create
     end
 
     def show 
-        users = User.find(params[:id])
-        render json: users
+        user = User.find(params[:id])
+        render json: user, serializer: UserSerializer
     end
 
     def me

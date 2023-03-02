@@ -8,7 +8,7 @@ skip_before_action :authorize, only: [:index, :show]
 
     def show
         review = Review.find(params[:id])
-        render json: review.user
+        render json: review, serializer: ReviewSerializer
     end
 
     def create
