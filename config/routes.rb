@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :create, :update, :destroy]
   
   post "/login", to: "sessions#create"
-  # get "/login", to: "sessions#create"
+  get "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
   post "/signup", to: "users#create"
   get "/me", to: "users#me"
-  delete "/logout", to: "sessions#destroy"
-  get "/restaurant", to: "restaurant#index"
+  get "/review", to: "review#show"
+  get "/restaurants", to: "restaurants#index"
+  get "/restaurants/:id", to: "restaurants#show"
 end
