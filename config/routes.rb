@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get "/review", to: "review#show"
   get "/restaurants", to: "restaurants#index"
   get "/restaurants/:id", to: "restaurants#show"
+  get "/users", to: "users#show"
+  # get "/user_profiles", to: "user_profiles#show"
 end
