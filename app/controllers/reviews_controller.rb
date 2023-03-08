@@ -1,5 +1,9 @@
 class ReviewsController < ApplicationController
-skip_before_action :authorize, only: [:index, :show]
+    skip_before_action :authorize, only: [:index, :show, :create, :patch]
+
+    def user
+        current_user
+    end
 
     def index
         reviews = Review.all
@@ -12,8 +16,27 @@ skip_before_action :authorize, only: [:index, :show]
     end
 
     def create
-        review = Review.create!(review_params)
-        render json: review, status: :created
+        restaurant = Restaurant.find(params[:restaurant_id])
+        # byebug
+        score = params[:score]
+        user = User.find(params[:user_id])
+        new_review = Review.create!(review_params)
+        # byebug
+        if user.reviews.where(user_id: user.id).count >= 1
+            review = Review.where(user_id: user.id).limit(1).first
+                
+            restaurants = [review, new_review]
+
+            ReviewComparisonPrompt.new(restaurants: restaurants).render
+            # restaurants = [
+            #     [Review.find_by(restaurant_id: review.restaurant_id)],
+            #     [restaurant_id, Review.find_by(restaurant_id: restaurant_Id)]
+            # ]
+            # if new_review.present?
+            #     increment_counter(:score, restaurant_id)
+            # end
+        end
+        render json: restaurants, status: :created
     end
 
     def update
@@ -32,6 +55,7 @@ skip_before_action :authorize, only: [:index, :show]
     private
 
     def review_params
-        params.permit(:score, :comments)
+        params.permit(:score, :comments, :likes, :restaurant_id, :user_id)
     end
+    
 end

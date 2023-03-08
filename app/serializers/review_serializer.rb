@@ -1,6 +1,6 @@
 class ReviewSerializer < ActiveModel::Serializer
   attributes :id, :score, :likes, :comments
 
-has_many :user
-has_many :restaurant
+has_one :user
+has_one :restaurant
 end
