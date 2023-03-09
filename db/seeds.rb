@@ -16,7 +16,7 @@ puts "Seeding Restaurants"
     Restaurant.create!(
         name: Faker::Restaurant.name,
         address: Faker::Address.street_address,
-        image: Faker::LoremFlickr.image(size: "750x750", search_terms: ['restaurants', 'food'], match_all: true),
+        image: Faker::LoremFlickr.unique.image(size: "750x750", search_terms: ['restaurants', 'food'], match_all: true),
         style: Faker::Restaurant.type
     )
 end

@@ -1,4 +1,5 @@
 class RestaurantsController < ApplicationController
+skip_before_action :authorize, only: :index
 
     def index
         restaurants = Restaurant.all
@@ -7,7 +8,7 @@ class RestaurantsController < ApplicationController
 
     def show
         restaurant = Restaurant.find(params[:id])
-        render json: restaurant
+        render json: restaurant, serializer: RestaurantSerializer 
     end
 
     def update
