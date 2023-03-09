@@ -2,6 +2,7 @@ puts "Seeding Users..."
 
 50.times do 
     User.create!(
+        avatar: Faker::LoremFlickr.image(size: "150x150", search_terms: ['person'], match_all: true),
         first_name: Faker::Name.unique.first_name,
         last_name: Faker::Name.unique.last_name,
         email: Faker::Internet.unique.email,
@@ -16,7 +17,7 @@ puts "Seeding Restaurants"
     Restaurant.create!(
         name: Faker::Restaurant.name,
         address: Faker::Address.street_address,
-        image: Faker::LoremFlickr.unique.image(size: "750x750", search_terms: ['restaurants', 'food'], match_all: true),
+        image: Faker::LoremFlickr.image(size: "750x750", search_terms: ['restaurants', 'food'], match_all: true),
         style: Faker::Restaurant.type
     )
 end
