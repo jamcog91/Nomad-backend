@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :follows
   resources :reviews, only: [:index, :show, :create, :update, :destroy]
   resources :restaurants, only: [:index, :show ]
   resources :users, only: [:index, :show, :create, :update, :destroy]
